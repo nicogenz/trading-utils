@@ -14,5 +14,8 @@
     "market"
   ],
   "author": "Nico Genz",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.3.5"
+  }
 }
