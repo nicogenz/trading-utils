@@ -1,0 +1,17 @@
+name: Build, Lint and run all tests
+
+on: [pull_request]
+
+jobs:
+  merge-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: npm install
+      - name: Build project
+        run: npm run build
+      - name: Lint code style
+        run: npm run lint
+      - name: Run tests
+        run: npm run test
