@@ -4,7 +4,10 @@
   "description": "A collection of helpful trading utility functions.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "lint": "eslint . --ext .ts --max-warnings=0",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "test": "jest"
   },
   "keywords": [
     "trading",
