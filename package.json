@@ -2,7 +2,7 @@
   "name": "trading-utils",
   "version": "0.0.2",
   "description": "A collection of helpful trading utility functions.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "lint": "eslint . --ext .ts --max-warnings=0",
