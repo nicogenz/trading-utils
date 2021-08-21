@@ -4,12 +4,6 @@ import { movingAverageService } from '../common/movingAverageService'
 
 export interface RsiIndicator {
     calculate(prices: number[]): TradingSuggestion
-
-    /**
-     * Calculates the Relative Strength Index History for the given dataset.
-     * @param prices The dataset which will be used for calculating the RSI.
-     */
-    calculateRSIIndicator(prices: number[]): number[]
 }
 
 export class RsiIndicatorImpl implements RsiIndicator {
@@ -18,7 +12,7 @@ export class RsiIndicatorImpl implements RsiIndicator {
     return dataPoints[dataPoints.length - 1] > 50 ? 'LONG' : dataPoints[dataPoints.length - 1] === 50 ? 'NEUTRAL' : 'SHORT'
   }
 
-  calculateRSIIndicator(prices: number[]): number[] {
+  private calculateRSIIndicator = (prices: number[]): number[] => {
     if (prices.length < 18) {
       throw new Error('Given parameter "prices" does not have the minimum length of 18')
     }
