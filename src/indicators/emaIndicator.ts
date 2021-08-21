@@ -2,11 +2,11 @@ import { round } from 'lodash'
 import { TradingSuggestion } from '../types'
 import { movingAverageService } from '../common/movingAverageService'
 
-interface EmaIndicator {
+export interface EmaIndicator {
     calculate(prices: number[]): TradingSuggestion
 }
 
-class EmaIndicatorImpl implements EmaIndicator {
+export class EmaIndicatorImpl implements EmaIndicator {
   calculate(prices: number[]): TradingSuggestion {
     const hundredDayEMAs = this.calculateEMAIndicators(prices)
     return prices[prices.length - 1] > hundredDayEMAs[hundredDayEMAs.length - 1] ? 'LONG' : 'SHORT'
@@ -23,5 +23,3 @@ class EmaIndicatorImpl implements EmaIndicator {
       return emas.map((value) => round(value, 2))
     }
 }
-
-export const emaIndicator: EmaIndicator = new EmaIndicatorImpl()

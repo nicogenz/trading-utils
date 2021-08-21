@@ -2,11 +2,11 @@ import { round } from 'lodash'
 import { MACDDataPoint, TradingSuggestion } from '../types'
 import { movingAverageService } from '../common/movingAverageService'
 
-interface MacdIndicator {
+export interface MacdIndicator {
     calculate(prices: number[]): TradingSuggestion
 }
 
-class MacdIndicatorImpl implements MacdIndicator {
+export class MacdIndicatorImpl implements MacdIndicator {
   calculate(prices: number[]): TradingSuggestion {
     const dataPoints = this.calculateMACDIndicator(prices)
     const previousDataPoint = dataPoints[dataPoints.length - 2]
@@ -67,5 +67,3 @@ class MacdIndicatorImpl implements MacdIndicator {
     return macdDataPoint
   }
 }
-
-export const macdIndicator: MacdIndicator = new MacdIndicatorImpl()

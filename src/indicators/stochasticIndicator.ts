@@ -2,11 +2,11 @@ import { min, max } from 'lodash'
 import { OhlcPrice, TradingSuggestion } from '../types'
 import { movingAverageService } from '../common/movingAverageService'
 
-interface StochasticIndicator {
+export interface StochasticIndicator {
     calculate(ohlcPrices: OhlcPrice[]): TradingSuggestion
 }
 
-class StochasticIndicatorImpl implements StochasticIndicator {
+export class StochasticIndicatorImpl implements StochasticIndicator {
   calculate(ohlcPrices: OhlcPrice[]): TradingSuggestion {
     const stochasticValues = this.calculateStochasticValues(ohlcPrices)
     const oversoldArea = 20
@@ -41,5 +41,3 @@ class StochasticIndicatorImpl implements StochasticIndicator {
       return stochasticValues
     }
 }
-
-export const stochasticIndicator: StochasticIndicator = new StochasticIndicatorImpl()

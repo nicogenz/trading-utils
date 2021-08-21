@@ -2,7 +2,7 @@ import { round } from 'lodash'
 import { TradingSuggestion } from '../types'
 import { movingAverageService } from '../common/movingAverageService'
 
-interface RsiIndicator {
+export interface RsiIndicator {
     calculate(prices: number[]): TradingSuggestion
 
     /**
@@ -12,7 +12,7 @@ interface RsiIndicator {
     calculateRSIIndicator(prices: number[]): number[]
 }
 
-class RsiIndicatorImpl implements RsiIndicator {
+export class RsiIndicatorImpl implements RsiIndicator {
   calculate(prices: number[]): TradingSuggestion {
     const dataPoints = this.calculateRSIIndicator(prices)
     return dataPoints[dataPoints.length - 1] > 50 ? 'LONG' : dataPoints[dataPoints.length - 1] === 50 ? 'NEUTRAL' : 'SHORT'
@@ -49,5 +49,3 @@ class RsiIndicatorImpl implements RsiIndicator {
     return relativeStrengths.map((rs) => round(100 - 100 / (1 + rs), 2))
   }
 }
-
-export const rsiIndicator: RsiIndicator = new RsiIndicatorImpl()
