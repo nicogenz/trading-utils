@@ -1,5 +1,7 @@
 # Trading Utils
 
+🚧 In development (APIs may change) 🚧
+
 A collection of helpful trading utility functions fully written in typescript.
 
 ## Available Indicators
