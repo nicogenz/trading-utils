@@ -16,5 +16,6 @@ A collection of helpful trading utility functions fully written in typescript.
 ```typescript
 import { rsiIndicator } from 'trading-utils'
 
-rsiIndicator.calculate([94.449997, 94.769997, ...])
+const rsiValues = rsiIndicator.calculateValues([94.449997, 94.769997, ...])
+const suggestion = rsiIndicator.calculateTradingSuggestion([94.449997, 94.769997, ...])
 ```
