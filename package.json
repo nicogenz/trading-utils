@@ -1,6 +1,6 @@
 {
   "name": "trading-utils",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A collection of helpful trading utility functions.",
   "main": "dist/index.js",
   "scripts": {
