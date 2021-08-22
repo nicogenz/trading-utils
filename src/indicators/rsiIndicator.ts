@@ -1,18 +1,9 @@
 import { round } from 'lodash'
-import { TradingSuggestion } from '../types'
 import { movingAverageService } from '../common/movingAverageService'
+import { AbstractIndicator } from './abstractIndicator'
 
-export interface RsiIndicator {
-    calculate(prices: number[]): TradingSuggestion
-}
-
-export class RsiIndicatorImpl implements RsiIndicator {
-  calculate(prices: number[]): TradingSuggestion {
-    const dataPoints = this.calculateRSIIndicator(prices)
-    return dataPoints[dataPoints.length - 1] > 50 ? 'LONG' : dataPoints[dataPoints.length - 1] === 50 ? 'NEUTRAL' : 'SHORT'
-  }
-
-  private calculateRSIIndicator = (prices: number[]): number[] => {
+export class RsiIndicatorImpl implements AbstractIndicator {
+  calculateValues(prices: number[]): number[] {
     if (prices.length < 18) {
       throw new Error('Given parameter "prices" does not have the minimum length of 18')
     }
@@ -41,5 +32,10 @@ export class RsiIndicatorImpl implements RsiIndicator {
       relativeStrengths.push(avgGains[i] / avgLoss[i])
     }
     return relativeStrengths.map((rs) => round(100 - 100 / (1 + rs), 2))
+  }
+
+  calculateTradingSuggestion(prices: number[]): 'LONG' | 'SHORT' | 'NEUTRAL' {
+    const dataPoints = this.calculateValues(prices)
+    return dataPoints[dataPoints.length - 1] > 50 ? 'LONG' : dataPoints[dataPoints.length - 1] === 50 ? 'NEUTRAL' : 'SHORT'
   }
 }

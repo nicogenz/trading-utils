@@ -1,5 +1,3 @@
-export type TradingSuggestion = 'LONG' | 'SHORT' | 'NEUTRAL'
-
 export interface OhlcPrice {
   open: number
   high: number
@@ -10,4 +8,9 @@ export interface OhlcPrice {
 export interface MACDDataPoint {
   macd: number
   signal: number
+}
+
+export interface StochasticDataPoint {
+  kPercent: number
+  dPercent: number
 }

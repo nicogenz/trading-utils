@@ -1,32 +1,10 @@
 import { round } from 'lodash'
-import { MACDDataPoint, TradingSuggestion } from '../types'
+import { MACDDataPoint } from '../types'
 import { movingAverageService } from '../common/movingAverageService'
+import { AbstractIndicator } from './abstractIndicator'
 
-export interface MacdIndicator {
-    calculate(prices: number[]): TradingSuggestion
-}
-
-export class MacdIndicatorImpl implements MacdIndicator {
-  calculate(prices: number[]): TradingSuggestion {
-    const dataPoints = this.calculateMACDIndicator(prices)
-    const previousDataPoint = dataPoints[dataPoints.length - 2]
-    const previousDifference = previousDataPoint.macd - previousDataPoint.signal
-    const latestDataPoint = dataPoints[dataPoints.length - 1]
-    const latestDifference = latestDataPoint.macd - latestDataPoint.signal
-    if (latestDifference >= 0 && latestDifference > previousDifference) {
-      return 'LONG'
-    } else if (latestDifference < 0 && latestDifference < previousDifference) {
-      return 'SHORT'
-    } else {
-      return 'NEUTRAL'
-    }
-  }
-
-  /**
-     * Calculates the MACD for the given dataset.
-     * @param prices The dataset which will be used for calculating the MACD.
-     */
-  calculateMACDIndicator(prices: number[]): MACDDataPoint[] {
+export class MacdIndicatorImpl implements AbstractIndicator {
+  calculateValues(prices: number[]): MACDDataPoint[] {
     if (prices.length < 36) {
       throw new Error('Given parameter "prices" does not have the minimum length of 35')
     }
@@ -65,5 +43,20 @@ export class MacdIndicatorImpl implements MacdIndicator {
     }
 
     return macdDataPoint
+  }
+
+  calculateTradingSuggestion(prices: number[]): 'LONG' | 'SHORT' | 'NEUTRAL' {
+    const dataPoints = this.calculateValues(prices)
+    const previousDataPoint = dataPoints[dataPoints.length - 2]
+    const previousDifference = previousDataPoint.macd - previousDataPoint.signal
+    const latestDataPoint = dataPoints[dataPoints.length - 1]
+    const latestDifference = latestDataPoint.macd - latestDataPoint.signal
+    if (latestDifference >= 0 && latestDifference > previousDifference) {
+      return 'LONG'
+    } else if (latestDifference < 0 && latestDifference < previousDifference) {
+      return 'SHORT'
+    } else {
+      return 'NEUTRAL'
+    }
   }
 }

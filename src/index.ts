@@ -1,9 +1,10 @@
-import { MacdIndicator, MacdIndicatorImpl } from './indicators/macdIndicator'
-import { EmaIndicator, EmaIndicatorImpl } from './indicators/emaIndicator'
-import { RsiIndicator, RsiIndicatorImpl } from './indicators/rsiIndicator'
-import { StochasticIndicator, StochasticIndicatorImpl } from './indicators/stochasticIndicator'
+import { MacdIndicatorImpl } from './indicators/macdIndicator'
+import { EmaIndicatorImpl } from './indicators/emaIndicator'
+import { RsiIndicatorImpl } from './indicators/rsiIndicator'
+import { StochasticIndicatorImpl } from './indicators/stochasticIndicator'
+import { AbstractIndicator } from './indicators/abstractIndicator'
 
-export const macdIndicator: MacdIndicator = new MacdIndicatorImpl()
-export const emaIndicator: EmaIndicator = new EmaIndicatorImpl()
-export const rsiIndicator: RsiIndicator = new RsiIndicatorImpl()
-export const stochasticIndicator: StochasticIndicator = new StochasticIndicatorImpl()
+export const macdIndicator: AbstractIndicator = new MacdIndicatorImpl()
+export const emaIndicator: AbstractIndicator = new EmaIndicatorImpl()
+export const rsiIndicator: AbstractIndicator = new RsiIndicatorImpl()
+export const stochasticIndicator: AbstractIndicator = new StochasticIndicatorImpl()
